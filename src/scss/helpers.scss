@@ -1,0 +1,53 @@
+/**
+ * Easy use of media queries in scss files 
+ * @param 		{String} 		$breakpoint      The name of a registered breakpoint
+ *
+ * @example 	scss
+ * @include respond-to(small) {};
+ *
+ */
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. ' + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+
+/**
+ * Easy use of media queries in scss files 
+ * @param 		{String} 		$responsive      Viewport-based size
+ * @param {Number}   $min         - Minimum padding size (px)
+ * @param {Number}   $max         - Maximum padding size (px)
+ * @example 	scss
+ * @include responsive-padding-left-right(2vw, 10px, 20px) {};
+ *
+ */
+
+@mixin responsive-padding-left-right($responsive, $min, $max) {
+  padding: 0 clamp(#{$responsive}, #{$min}, #{$max});
+}
+  
+
+/**
+ * Easy use of media queries in scss files 
+ * @param 		{String} 		$responsive      Viewport-based size
+ * @param {Number}   $min         - Minimum margin size (px)
+ * @param {Number}   $max         - Maximum margin size (px)
+ * @example 	scss
+ * @include responsive-margin-left-right(2vw, 10px, 20px){};
+ *
+ */
+
+ @mixin responsive-margin-left-right($responsive, $min, $max) {
+  margin: 0 clamp(#{$responsive}, #{$min}, #{$max});
+}
+  
+
+@mixin zero-margin-zero-padding {
+  margin: 0;
+  padding: 0;
+}

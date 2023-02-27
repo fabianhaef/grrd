@@ -1,0 +1,69 @@
+@use 'sass:map';
+@import 'mixins', 'helpers';
+
+/*
+ * Default grid values which are used, when no breakpoints are defined
+ *
+ */
+$settings: (
+        columns: 24,
+        container-max-width: 1680px,
+        gutter-width: 0px,
+        vertical-space: 0px,
+);
+
+$breakpoints: (
+        landscape: 'only screen and (orientation:landscape)',
+        portrait : 'only screen and (orientation:portrait)',
+        retina : 'only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)',
+);
+
+$container-widths: ();
+$gutter-widths: ();
+
+/**
+ * Register a new breakpoint with gutter and vertical space values for the container
+ * @param 		{String} 		$name 		     The new breakpoint name
+ * @param 		{Number} 		$pixels 	     The pixel value for the breakpoint
+ * @param       {Number}        $gutter          Optional gutter width for the container
+ * @param       {Number}        $vertical-space  Optional vertical space (left and right) for the container
+ *
+ * @example 	scss
+ * @include register-breakpoint(mobile, 768px);
+ *
+ */
+@mixin register-breakpoint($name, $pixels, $gutter : 0px, $vertical-space : 0px) {
+  $breakpoints: map.merge($breakpoints, ($name : 'only screen and (min-width: #{$pixels})')) !global;
+  $gutter-widths: map.merge($gutter-widths, ($name : $gutter)) !global;
+  $container-widths: map.merge($container-widths, ($name : calc(100% - #{$vertical-space * 2}))) !global;
+}
+
+/**
+ * Easy flex setup mixin
+ * @param 		{Map} 		    $setup_settings  The base grid settings
+ *
+ * @example 	scss
+ * @include @include create-easy-flex((
+ *      columns: 12,
+ *      container-width: 100%,
+ *      container-max-width: $container-max,
+ *      gutter-width: 10px,
+ *      vertical-space: 10px,
+ *  ));
+ *
+ */
+@mixin create-grid($setup_settings : ()) {
+  $settings: map.merge($settings, $setup_settings) !global;
+
+  // Grid setup mixins
+  @include create-container();
+  @include create-row();
+  @include create-grid-base();
+  @include create-grid-states();
+  @include create-prefixes();
+
+  // Helper classes
+  @include create-order();
+  @include create-show-and-hide();
+  @include create-gutter-options();
+}

@@ -1,0 +1,348 @@
+@use 'sass:math';
+
+/**
+ * Create the base container with responsive width values for each breakpoint
+ *
+ * @example 	scss
+ * @include create-container();
+ *
+ */
+@mixin create-container() {
+  .container {
+    width: calc(map-get($settings, container-width) - map-get($settings, vertical-space) * 2);
+    @if $primary-color {
+      max-width: map-get($settings, container-max-width);
+    }
+    margin: 0 auto;
+
+    @each $key, $value in $container-widths {
+      @include respond-to($key) {
+        width: $value;
+      }
+    }
+  }
+}
+
+/**
+ * Create the row with responsive values for each breakpoint and some helper classes
+ *
+ * @example 	scss
+ * @include create-row(mobile, 768px);
+ *
+ */
+@mixin create-row() {
+  .row {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: math.div(map-get($settings, gutter-width), -2);
+    margin-right: math.div(map-get($settings, gutter-width), -2);
+
+    @each $key, $value in $breakpoints {
+      @include respond-to($key) {
+        @if map-has-key($gutter-widths, $key) {
+          margin-left: math.div(map-get($gutter-widths, $key), -2);
+          margin-right: math.div(map-get($gutter-widths, $key), -2);
+        }
+      }
+    }
+
+    &-reverse {
+      flex-flow: row-reverse wrap;
+
+      @each $key, $value in $container-widths {
+        @include respond-to($key) {
+          &\@#{$key} {
+            flex-flow: row-reverse wrap;
+          }
+        }
+      }
+    }
+
+    &-align-center {
+      align-items: center;
+    }
+
+    &-align-start {
+      align-items: flex-start;
+    }
+
+    &-align-end {
+      align-items: flex-end;
+    }
+
+    &-align-stretch {
+      align-items: stretch;
+    }
+
+    &-align-baseline {
+      align-items: baseline;
+    }
+
+    &-justify-between {
+      justify-content: space-between;
+    }
+
+    &-justify-around {
+      justify-content: space-around;
+    }
+
+    &-justify-even {
+      justify-content: space-evenly;
+    }
+
+    &-justify-end {
+      justify-content: flex-end;
+    }
+
+    &-justify-center {
+      justify-content: center;
+    }
+
+    &-no-wrap {
+      flex-flow: column nowrap;
+    }
+
+    @each $key, $value in $breakpoints {
+      @include respond-to($key) {
+
+        &-align-center\@#{$key} {
+          align-items: center;
+        }
+
+        &-align-start\@#{$key} {
+          align-items: flex-start;
+        }
+
+        &-align-end\@#{$key} {
+          align-items: flex-end;
+        }
+
+        &-align-stretch\@#{$key} {
+          align-items: stretch;
+        }
+
+        &-align-baseline\@#{$key} {
+          align-items: baseline;
+        }
+
+        &-justify-between\@#{$key} {
+          justify-content: space-between;
+        }
+
+        &-justify-around\@#{$key} {
+          justify-content: space-around;
+        }
+
+        &-justify-even\@#{$key} {
+          justify-content: space-evenly;
+        }
+
+        &-justify-start\@#{$key} {
+          justify-content: flex-start;
+        }
+
+        &-justify-end\@#{$key} {
+          justify-content: flex-end;
+        }
+
+        &-justify-center\@#{$key} {
+          justify-content: center;
+        }
+
+        &-no-wrap\@#{$key} {
+          flex-flow: column nowrap;
+        }
+
+        &-wrap\@#{$key} {
+          flex-flow: row wrap;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Create the base grid gr classes with helper classes
+ *
+ * @example 	scss
+ * @include create-grid-base();
+ *
+ */
+@mixin create-grid-base() {
+  $columns-amount: map-get($settings, columns);
+
+  @for $index from 1 through $columns-amount {
+    .gr-#{$index} {
+      max-width: math.div(100%, $columns-amount) * $index;
+      flex-basis: math.div(100%, $columns-amount) * $index;
+      flex-direction: column;
+      display: block;
+      box-sizing: border-box;
+
+    }
+
+    .prefix-#{$index} {
+      margin-left: math.div(100%, $columns-amount) * $index;
+    }
+
+    .suffix-#{$index} {
+      margin-right: math.div(100%, $columns-amount) * $index;
+    }
+
+    .push-#{$index} {
+      position: relative;
+      left: math.div(100%, $columns-amount) * $index;
+      right: auto;
+    }
+
+    .pull-#{$index} {
+      position: relative;
+      right: math.div(100%, $columns-amount) * $index;
+      left: auto;
+    }
+  }
+
+  .show {
+    display: unset;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+/**
+ * Create the gr classes for each breakpoint with helper classes *
+ * @example 	scss
+ * @include create-grid-states();
+ *
+ */
+@mixin create-grid-states() {
+  $columns-amount: map-get($settings, columns);
+
+  @each $key, $value in $breakpoints {
+    @for $index from 1 through $columns-amount {
+      @include respond-to($key) {
+        .gr-#{$index}\@#{$key} {
+          max-width: math.div(100%, $columns-amount) * $index;
+          flex-basis: math.div(100%, $columns-amount) * $index;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Create prefix helper class for every breakpoint
+ *
+ * @example 	scss
+ * @include create-prefixes();
+ *
+ */
+@mixin create-prefixes() {
+  $columns-amount: map-get($settings, columns);
+
+  @each $key, $value in $breakpoints {
+    @include respond-to($key) {
+      @for $index from $columns-amount through 1 {
+        .prefix-0\@#{$key} {
+          margin-left: 0;
+        }
+
+        .pull-0\@#{$key} {
+          position: unset;
+          right: unset;
+          left: unset;
+        }
+
+        .push-0\@#{$key} {
+          position: unset;
+          left: unset;
+          right: unset;
+        }
+
+        .suffix-0\@#{$key} {
+          margin-right: 0;
+        }
+
+        .prefix-#{$index}\@#{$key} {
+          margin-left: math.div(100%, $columns-amount) * $index;
+        }
+
+        .suffix-#{$index}\@#{$key} {
+          margin-right: math.div(100%, $columns-amount) * $index;
+        }
+
+        .push-#{$index}\@#{$key} {
+          position: relative;
+          left: math.div(100%, $columns-amount) * $index;
+          right: auto;
+        }
+
+        .pull-#{$index}\@#{$key} {
+          position: relative;
+          right: math.div(100%, $columns-amount) * $index;
+          left: auto;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Create order class for each breakpoint
+ *
+ * @example 	scss
+ * @include create-order();
+ *
+ */
+@mixin create-order() {
+  $columns-amount: 12;
+
+  @if map-has-key($settings, columns) {
+    $columns-amount: map-get($settings, columns);
+  }
+
+  @for $index from $columns-amount through 1 {
+    @each $key, $value in $breakpoints {
+      @include respond-to($key) {
+        .order-#{$index}\@#{$key} {
+          order: $index;
+        }
+
+        .order-first\@#{$key} {
+          order: -1;
+        }
+
+        .order-last\@#{$key} {
+          order: 9999;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Create show and hide class for each breakpoint
+ *
+ * @example 	scss
+ * @include create-show-and-hide();
+ *
+ */
+@mixin create-show-and-hide() {
+  @each $key, $value in $breakpoints {
+    @include respond-to($key) {
+      .show\@#{$key} {
+        display: unset;
+      }
+      .row {
+        &.show\@#{$key} {
+          display: flex;
+        }
+      }
+      .hide\@#{$key} {
+        display: none;
+      }
+    }
+  }
+}
