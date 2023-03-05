@@ -1,6 +1,6 @@
 {
   "name": "grrd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Flex-based grid system",
   "repository": {
     "type": "git",
