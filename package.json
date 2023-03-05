@@ -4,7 +4,7 @@
   "description": "Flex-based grid system",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hi-digital/easy-flex"
+    "url": "git+https://github.com/hi-digital/easy-flex.git"
   },
   "scripts": {
     "dev": "vite",
@@ -28,5 +28,10 @@
     "autoprefixer": "^10.4",
     "postcss-scss": "^4.0",
     "vite": "^4.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/hi-digital/easy-flex/issues"
+  },
+  "homepage": "https://github.com/hi-digital/easy-flex#readme",
+  "main": "vite.config.js"
 }
