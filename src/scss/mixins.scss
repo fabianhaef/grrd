@@ -10,7 +10,7 @@
 @mixin create-container() {
   .container {
     width: calc(map-get($settings, container-width) - map-get($settings, vertical-space) * 2);
-    @if $primary-color {
+    @if map-get($settings, container-max-width) {
       max-width: map-get($settings, container-max-width);
     }
     margin: 0 auto;

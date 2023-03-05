@@ -65,5 +65,4 @@ $gutter-widths: ();
   // Helper classes
   @include create-order();
   @include create-show-and-hide();
-  @include create-gutter-options();
 }

@@ -1,0 +1,18 @@
+@import '../index.scss';
+
+$container-max: 1680px;
+
+@include register-breakpoint('tiny', 480px, 10px, 10px);
+@include register-breakpoint('small', 768px, 10px, 10px);
+@include register-breakpoint('medium', 1024px, 20px, 20px);
+@include register-breakpoint('large', 1200px, 20px, 20px);
+@include register-breakpoint('huge', 1440px, 20px, 40px);
+@include register-breakpoint('full', $container-max, 20px, 40px);
+
+@include create-grid((
+        columns: 12,
+        container-width: 100%,
+        container-max-width: $container-max,
+        gutter-width: 10px,
+        vertical-space: 10px,
+));

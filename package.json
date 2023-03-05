@@ -1,13 +1,15 @@
 {
-  "name": "grrr",
-  "version": "0.0.1",
+  "name": "grrd",
+  "version": "0.0.2",
   "description": "Flex-based grid system",
   "repository": {
     "type": "git",
     "url": "https://github.com/hi-digital/easy-flex"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "flexbox",
@@ -21,5 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "sass": "^1.57.*"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4",
+    "postcss-scss": "^4.0",
+    "vite": "^4.0"
   }
 }
