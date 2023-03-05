@@ -1,10 +1,10 @@
 {
   "name": "grrd",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Flex-based grid system",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hi-digital/easy-flex.git"
+    "url": "git+https://github.com/fabianhaef/grrd.git"
   },
   "scripts": {
     "dev": "vite",
@@ -30,8 +30,8 @@
     "vite": "^4.0"
   },
   "bugs": {
-    "url": "https://github.com/hi-digital/easy-flex/issues"
+    "url": "https://github.com/fabianhaef/grrd/issues"
   },
-  "homepage": "https://github.com/hi-digital/easy-flex#readme",
+  "homepage": "https://github.com/fabianhaef/grrd#readme",
   "main": "vite.config.js"
 }
