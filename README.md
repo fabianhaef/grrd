@@ -8,18 +8,18 @@ grrd - flex based grid system heavily inspired by Coffeekraken's gridle v2.0.48 
 NPM
 
 ```
-npm install @fabianhaef/grrd --save-dev
+npm install grrd --save-dev
 ```
 YARN
 
 ```
-yarn add @fabianhaef/easy-flex -D
+yarn add easy-flex -D
 ```
 
 ## Quick Start
 
 ```scss
-@import '@fabianhaef/grrd';
+@import 'grrd';
 ```
 
 Define breakpoints with gutter width and vertical space for the container.
