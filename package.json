@@ -1,5 +1,5 @@
 {
-  "name": "@fabianhaef/grrd",
+  "name": "grrd",
   "version": "0.0.5",
   "description": "Flex-based grid system",
   "repository": {
