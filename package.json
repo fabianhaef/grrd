@@ -1,6 +1,6 @@
 {
-  "name": "grrd",
-  "version": "0.0.4",
+  "name": "@fabianhaef/grrd",
+  "version": "0.0.5",
   "description": "Flex-based grid system",
   "repository": {
     "type": "git",
@@ -19,7 +19,6 @@
     "grid system",
     "scss grid"
   ],
-  "author": "fabianhaef",
   "license": "MIT",
   "dependencies": {
     "sass": "^1.57.*"
