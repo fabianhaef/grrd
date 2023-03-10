@@ -7,14 +7,13 @@
  * @include create-container();
  *
  */
-@mixin create-container() {
+ @mixin create-container() {
   .container {
     width: calc(map-get($settings, container-width) - map-get($settings, vertical-space) * 2);
     max-width: map-get($settings, container-max-width);
     margin: 0 auto;
 
-    @each $key,
-    $value in $container-widths {
+    @each $key, $value in $container-widths {
       @include respond-to($key) {
         width: $value;
       }
@@ -36,8 +35,7 @@
     margin-left: math.div(map-get($settings, gutter-width), -2);
     margin-right: math.div(map-get($settings, gutter-width), -2);
 
-    @each $key,
-    $value in $breakpoints {
+    @each $key, $value in $breakpoints {
       @include respond-to($key) {
         @if map-has-key($gutter-widths, $key) {
           margin-left: math.div(map-get($gutter-widths, $key), -2);
@@ -49,8 +47,7 @@
     &-reverse {
       flex-flow: row-reverse wrap;
 
-      @each $key,
-      $value in $container-widths {
+      @each $key, $value in $container-widths {
         @include respond-to($key) {
           &\@#{$key} {
             flex-flow: row-reverse wrap;
@@ -182,17 +179,17 @@
       box-sizing: border-box;
       padding-left: math.div(map-get($settings, gutter-width), 2);
       padding-right: math.div(map-get($settings, gutter-width), 2);
-    }
 
-    @each $key,
-    $value in $breakpoints {
-      @include respond-to($key) {
-        @if map-has-key($gutter-widths, $key) {
-          padding-left: math.div(map-get($gutter-widths, $key), 2);
-          padding-right: math.div(map-get($gutter-widths, $key), 2);
+      @each $key, $value in $breakpoints {
+        @include respond-to($key) {
+          @if map-has-key($gutter-widths, $key) {
+            padding-left: math.div(map-get($gutter-widths, $key), 2);
+            padding-right: math.div(map-get($gutter-widths, $key), 2);
+          }
         }
       }
     }
+
 
     .prefix-#{$index} {
       margin-left: math.div(100%, $columns-amount) * $index;
