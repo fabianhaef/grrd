@@ -10,12 +10,11 @@
 @mixin create-container() {
   .container {
     width: calc(map-get($settings, container-width) - map-get($settings, vertical-space) * 2);
-    @if map-get($settings, container-max-width) {
-      max-width: map-get($settings, container-max-width);
-    }
+    max-width: map-get($settings, container-max-width);
     margin: 0 auto;
 
-    @each $key, $value in $container-widths {
+    @each $key,
+    $value in $container-widths {
       @include respond-to($key) {
         width: $value;
       }
@@ -37,7 +36,8 @@
     margin-left: math.div(map-get($settings, gutter-width), -2);
     margin-right: math.div(map-get($settings, gutter-width), -2);
 
-    @each $key, $value in $breakpoints {
+    @each $key,
+    $value in $breakpoints {
       @include respond-to($key) {
         @if map-has-key($gutter-widths, $key) {
           margin-left: math.div(map-get($gutter-widths, $key), -2);
@@ -49,7 +49,8 @@
     &-reverse {
       flex-flow: row-reverse wrap;
 
-      @each $key, $value in $container-widths {
+      @each $key,
+      $value in $container-widths {
         @include respond-to($key) {
           &\@#{$key} {
             flex-flow: row-reverse wrap;
@@ -102,7 +103,8 @@
       flex-flow: column nowrap;
     }
 
-    @each $key, $value in $breakpoints {
+    @each $key,
+    $value in $breakpoints {
       @include respond-to($key) {
 
         &-align-center\@#{$key} {
@@ -178,7 +180,18 @@
       flex-direction: column;
       display: block;
       box-sizing: border-box;
+      padding-left: math.div(map-get($settings, gutter-width), 2);
+      padding-right: math.div(map-get($settings, gutter-width), 2);
+    }
 
+    @each $key,
+    $value in $breakpoints {
+      @include respond-to($key) {
+        @if map-has-key($gutter-widths, $key) {
+          padding-left: math.div(map-get($gutter-widths, $key), 2);
+          padding-right: math.div(map-get($gutter-widths, $key), 2);
+        }
+      }
     }
 
     .prefix-#{$index} {
@@ -220,7 +233,8 @@
 @mixin create-grid-states() {
   $columns-amount: map-get($settings, columns);
 
-  @each $key, $value in $breakpoints {
+  @each $key,
+  $value in $breakpoints {
     @for $index from 1 through $columns-amount {
       @include respond-to($key) {
         .gr-#{$index}\@#{$key} {
@@ -242,7 +256,8 @@
 @mixin create-prefixes() {
   $columns-amount: map-get($settings, columns);
 
-  @each $key, $value in $breakpoints {
+  @each $key,
+  $value in $breakpoints {
     @include respond-to($key) {
       @for $index from $columns-amount through 1 {
         .prefix-0\@#{$key} {
@@ -304,7 +319,9 @@
   }
 
   @for $index from $columns-amount through 1 {
-    @each $key, $value in $breakpoints {
+
+    @each $key,
+    $value in $breakpoints {
       @include respond-to($key) {
         .order-#{$index}\@#{$key} {
           order: $index;
@@ -330,16 +347,20 @@
  *
  */
 @mixin create-show-and-hide() {
-  @each $key, $value in $breakpoints {
+
+  @each $key,
+  $value in $breakpoints {
     @include respond-to($key) {
       .show\@#{$key} {
         display: unset;
       }
+
       .row {
         &.show\@#{$key} {
           display: flex;
         }
       }
+
       .hide\@#{$key} {
         display: none;
       }
